@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Video</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi4tal"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNSB6Ut"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <h1 class="text-center mb-4">Search Video</h1>
+            <form method="POST" action="/search">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="url" placeholder="Enter YouTube URL" required>
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </div>
+                </div>
+            </form>
+            {% if title %}
+                <div class="card">
+                    <img class="card-img-top" src="{{ thumbnail }}" alt="{{ title }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ title }}</h5>
+                        <form method="POST" action="/download">
+                            <input type="hidden" name="url" value="{{ url }}">
+                            <button type="submit" class="btn btn-primary">Download MP3</button>
+                        </form>
+                    </div>
+                </div>
+            {% elif error %}
+                <div class="alert alert-danger mt-3" role="alert">
+                    {{ error }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+</body>
+</html>
